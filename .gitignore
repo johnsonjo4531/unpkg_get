@@ -1,0 +1,4 @@
+# Normally this would go into source control, but since
+# this module has no dependencies on unpkg.com it is left out
+# and just for testing purposes.
+unpkg.com
