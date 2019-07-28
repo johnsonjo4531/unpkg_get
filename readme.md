@@ -115,7 +115,7 @@ deno -A https://deno.land/std/installer/mod.ts deno_installer https://deno.land/
 Then install unpkg_get:
 
 ```bash
-deno_installer -A unpkg_get ./unpkg_get.ts -A
+deno_installer -A unpkg_get https://raw.githubusercontent.com/johnsonjo4531/unpkg_get/master/unpkg_get.ts -A
 ```
 
 and then you're ready to follow the above instructions!
