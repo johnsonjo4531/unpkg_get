@@ -12,7 +12,7 @@
 
 ##  What
 
-A command line program to get a es2015 module from unpkg and installs it and all it's dependencies into an `unpkg.com` folder.
+A command line program to get a es2015 module from unpkg and installs it and all it's dependencies into an `unpkg.com` folder. Basically a simple wrapper around `deno fetch` that gets only the unpkg.com directory and down and places it in the current working directory.
 
 ## Why
 
@@ -124,4 +124,4 @@ and then you're ready to follow the above instructions!
 ## Todo
 
   - Search all dependencies and rename imports to match/mirror those in importmap file.
-    - This only matters as long as browsers don't support import maps, otherwise if they do support import maps just use a second import map for the browser to access the local file systemß.
+    - This only matters as long as browsers don't support import maps, otherwise if they do support import maps just use a second import map for the browser to access the local file system.
