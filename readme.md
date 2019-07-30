@@ -97,7 +97,7 @@ $ tree ./unpkg.com/
 ```
 
 generally it will pull down the files that work and even the files
-that errored into a `./deno_modules` folder which the subpath ./deno_modules/deps/https/unpkg.com 
+that errored into a `./deno_modules` folder which the subpath `./deno_modules/deps/https/unpkg.com` 
 will get copied to the `./unpkg.com` folder. Usually the file will error because you haven't specified
 all the bare imports (which are non-relative imports where relative imports are imports which start
 with `.`, `./`, or `../`) in your import maps.
