@@ -12,7 +12,7 @@
 
 ##  What
 
-A command line program to get a es2015 module from unpkg and installs it and all its dependencies into an `unpkg.com` folder. Basically a simple wrapper around `deno fetch` that gets only the unpkg.com directory and down and places it in the current working directory.
+A command line program to get a es2015 module from unpkg and installs it and all its dependencies into an `unpkg.com` folder. Basically a simple wrapper around `deno fetch` that copies the unpkg.com directory and all its sub-directories and moves it to the current working directory.
 
 ## Why
 
