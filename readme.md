@@ -12,12 +12,12 @@
 
 ##  What
 
-A command line program to get a es2015 module from unpkg and installs it and all its dependencies into an `unpkg.com` folder. Basically a simple wrapper around `deno fetch` that copies the unpkg.com directory and all its sub-directories and moves it to the current working directory.
+A command line program to get an es2015 module from unpkg and install it and all its dependencies into an `unpkg.com` folder. Basically, it's a simple wrapper around `deno fetch` that copies the unpkg.com directory and all its sub-directories and moves it to the current working directory.
 
 ## Why
 
-Because, you may want to use your es2015 modules directly in the browser with no transpiling
-step other than to the current flavor of JavaScript which conveniently is already provided by unpkg.
+Because, you may want to use others es2015 modules directly in the browser with no transpiling
+step other than to the current flavor of JavaScript which is already provided by unpkg.
 
 ## Where
 
@@ -97,8 +97,8 @@ $ tree ./unpkg.com/
 ```
 
 generally it will pull down the files that work and even the files
-that errored into a `./deno_modules` folder which the subpath `./deno_modules/deps/https/unpkg.com` 
-will get copied to the `./unpkg.com` folder. Usually the file will error because you haven't specified
+that errored into a `./deno_modules` folder for which the subpath `./deno_modules/deps/https/unpkg.com` 
+will get copied to the `./unpkg.com` folder. Usually the `unpkg_get` script will error because you haven't specified
 all the bare imports (which are non-relative imports where relative imports are imports which start
 with `.`, `./`, or `../`) in your import maps.
 
@@ -123,5 +123,4 @@ and then you're ready to follow the above instructions!
 
 ## Todo
 
-  - Search all dependencies and rename imports to match/mirror those in importmap file.
-    - This only matters as long as browsers don't support import maps, otherwise if they do support import maps just use a second import map for the browser to access the local file system.
+  1. Search all dependencies and rename bare imports to use relative imports to the local file system according to the path shown in the importmap. This only matters as long as browsers don't support import maps, otherwise if they do support import maps just use a second import map for the browser to access the server's local file system.
