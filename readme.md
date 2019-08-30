@@ -7,6 +7,8 @@
 	- [How](#how)
 		- [Basic Usage:](#basic-usage)
 		- [Import Maps Usage:](#import-maps-usage)
+			- [Required Manual Configuration](#required-manual-configuration)
+			- [Error Handling](#error-handling)
 	- [Install](#install)
 	- [Todo](#todo)
 
@@ -17,15 +19,17 @@ A command line program to get an es2015 module from unpkg and install it and all
 ## Why
 
 Because, you may want to use others es2015 modules directly in the browser with no transpiling
-step other than to the current flavor of JavaScript which is already provided by unpkg.
+step other than to the current flavor of JavaScript which is hopefully already provided by those who upload to unpkg.
 
 ## Where
 
-Main package is [`unpkg_get.ts`](./unpkg_get.ts)
+Main module is [`unpkg_get.ts`](./unpkg_get.ts)
 
 ##  How
 
 ### Basic Usage:
+
+If your module has dependencies from npm you should see the import maps usage section otherwise this basic usage should work:
 
 ```bash
 $ unpkg_get -A @webcomponents/custom-elements
@@ -47,14 +51,7 @@ $ tree ./unpkg.com
 
 ### Import Maps Usage:
 
-notice how the option below is `importmapping` instead of deno's regular `importmap`
-
-```bash
-$ unpkg_get -A --importmapping=lit-element-importmap.json lit-element
-```
-
-the above requires the following import map for which describes `lit-html`'s location 
-which is the only dependency of `lit-element`.
+More regularly your module from unpkg will have other dependencies from npm that you can get from unpkg.com. The below requires the following import map which describes `lit-html`'s location on unpkg. `lit-html` is the only dependency of `lit-element` which makes this a little easier.
 
 ```json
 {
@@ -63,6 +60,12 @@ which is the only dependency of `lit-element`.
     "lit-html/": "https://unpkg.com/lit-html@1.1.1/"
   }
 }
+```
+
+notice how the option below is `importmapping` instead of deno's regular `importmap`
+
+```bash
+$ unpkg_get -A --importmapping=lit-element-importmap.json lit-element
 ```
 
 which gives the following directory structure:
@@ -96,11 +99,16 @@ $ tree ./unpkg.com/
 4 directories, 18 files
 ```
 
-generally it will pull down the files that work and even the files
+#### Required Manual Configuration
+
+Note that sadly the import maps usage requires manual renaming of bare imports to relative imports which you could do with a find and replace. This is a [todo](#todo) item and will hopefully be fixed sometime in the future.
+
+#### Error Handling
+
+Generally it will pull down the files that work and even the files
 that errored into a `./deno_modules` folder for which the subpath `./deno_modules/deps/https/unpkg.com` 
 will get copied to the `./unpkg.com` folder. Usually the `unpkg_get` script will error because you haven't specified
-all the bare imports (which are non-relative imports where relative imports are imports which start
-with `.`, `./`, or `../`) in your import maps.
+all the bare imports in your import maps (bare imports are non-relative imports where relative imports are imports which start with `.`, `./`, or `../`). You can check the files that have been pulled down for bare imports that haven't been added to an import map.
 
 ##  Install
 
